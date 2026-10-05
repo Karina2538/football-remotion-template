@@ -2,25 +2,29 @@ name: Render Football Video
 
 on:
   workflow_dispatch:
-    inputs:
-      client_payload:
-        description: 'Match Data JSON'
-        required: false
-        default: '{}'
 
 jobs:
   render:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
-      - run: npm install
+      - uses: actions/checkout@v4
 
-      # မြန်မာစာ ဖောင့်များ ထည့်သွင်းခြင်း
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Dependencies
+        run: npm install
+
+      # မြန်မာစာ ဖောင့်များ စနစ်တကျ ထည့်သွင်းခြင်း
       - name: Install Myanmar Fonts
-        run: sudo apt-get update && sudo apt-get install -y fonts-noto-unicode-busra fonts-sil-padauk
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fonts-noto-ui-core fonts-sil-padauk
+
+      # Chrome / Puppeteer အတွက် လိုအပ်သော Linux Libraries များ
+      - name: Install Remotion Dependencies
+        run: npx remotion browser ensure
 
       - name: Render Video
         run: |
