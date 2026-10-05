@@ -1,0 +1,28 @@
+name: Render Football Video
+on:
+  repository_dispatch:
+    types: [render-video]
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: npm install
+
+      # မြန်မာစာ ဖောင့်များ အလိုအလျောက် ထည့်သွင်းခြင်း
+      - name: Install Myanmar Fonts
+        run: sudo apt-get update && sudo apt-get install -y fonts-noto-unicode-busra fonts-sil-padauk
+
+      - name: Render Video
+        run: |
+          npx remotion render src/index.ts MatchPreview out/output.mp4 --props='${{ toJson(github.event.client_payload) }}'
+
+      - name: Upload Video Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: football-video
+          path: out/output.mp4
