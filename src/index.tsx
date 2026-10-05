@@ -7,7 +7,7 @@ export const RemotionRoot = () => {
       <Composition
         id="MatchPreview"
         component={MatchdayComposition}
-        durationInFrames={1740} // 58 Seconds at 30 FPS
+        durationInFrames={1740}
         fps={30}
         width={1080}
         height={1920}
@@ -32,7 +32,7 @@ export const RemotionRoot = () => {
             { number: 8, name: 'ဖာနန်ဒက်စ်', position: 'MF' },
             { number: 17, name: 'ဂါနာချို', position: 'FW' },
             { number: 10, name: 'ရက်ရှ်ဖို့ဒ်', position: 'FW' },
-            { number: 11, name: 'ဟော့ဂျလန်း', position: 'FW' },
+            { number: 11, name: 'ဟော့ဂျလန်း', position: 'FW' }
           ]
         }}
       />
