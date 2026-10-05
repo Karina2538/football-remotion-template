@@ -16,15 +16,11 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      # မြန်မာစာ ဖောင့်များ စနစ်တကျ ထည့်သွင်းခြင်း
+      # Ubuntu 24.04 အတွက် နာမည်မှန် မြန်မာစာ ဖောင့်များ ထည့်သွင်းခြင်း
       - name: Install Myanmar Fonts
         run: |
           sudo apt-get update
-          sudo apt-get install -y fonts-noto-ui-core fonts-sil-padauk
-
-      # Chrome / Puppeteer အတွက် လိုအပ်သော Linux Libraries များ
-      - name: Install Remotion Dependencies
-        run: npx remotion browser ensure
+          sudo apt-get install -y fonts-noto-core fonts-sil-padauk
 
       - name: Render Video
         run: |
